@@ -1,14 +1,14 @@
 import { ApiConfig } from "@/config/apiConfig";
-import { ICategory, ICategoryResponse } from "@/types/category";
+import { CreateJobDTO, IJob, IJobResponse } from "@/types/job";
 import { apiService } from "@/utils/apiService";
 import get from "lodash/get";
 
-const fetchCategories = async () => {
+const fetchJobs = async () => {
   try {
     const { data } = await apiService.get(
-      `${ApiConfig.baseUrl}/${ApiConfig.categories}`,
+      `${ApiConfig.baseUrl}/${ApiConfig.jobs}`,
     );
-    return data as ICategoryResponse<ICategory[]>;
+    return data as IJobResponse<IJob[]>;
   } catch (error) {
     console.error(error);
     if (get(error, "response", undefined)) {
@@ -19,12 +19,12 @@ const fetchCategories = async () => {
   }
 };
 
-const fetchCategoryById = async (id: string) => {
+const fetchJobById = async (id: string) => {
   try {
     const { data } = await apiService.get(
-      `${ApiConfig.baseUrl}/${ApiConfig.categories}/${id}`,
+      `${ApiConfig.baseUrl}/${ApiConfig.jobs}/${id}`,
     );
-    return data as ICategoryResponse<ICategory>;
+    return data as IJobResponse<IJob>;
   } catch (error) {
     console.error(error);
     if (get(error, "response", undefined)) {
@@ -35,29 +35,13 @@ const fetchCategoryById = async (id: string) => {
   }
 };
 
-const createCategory = async (body: { name: string }) => {
+const createJob = async (body: CreateJobDTO) => {
   try {
     const { data } = await apiService.post(
-      `${ApiConfig.baseUrl}/${ApiConfig.categories}`,
+      `${ApiConfig.baseUrl}/${ApiConfig.jobs}`,
       body,
     );
-    return data as ICategoryResponse<ICategory>;
-  } catch (error) {
-    console.error(error);
-    if (get(error, "response", undefined)) {
-      console.error("Error Status Code:", get(error, "response.status"));
-      console.error("Error Response Data:", get(error, "response.data"));
-    }
-    throw new Error(`${get(error, "response.data.data")}`);
-  }
-};
-
-const deleteCategory = async (id: string) => {
-  try {
-    const { data } = await apiService.delete(
-      `${ApiConfig.baseUrl}/${ApiConfig.categories}/${id}`,
-    );
-    return data as ICategoryResponse<null>;
+    return data as IJobResponse<IJob>;
   } catch (error) {
     console.error(error);
     if (get(error, "response", undefined)) {
@@ -67,27 +51,37 @@ const deleteCategory = async (id: string) => {
     throw new Error(`${get(error, "response.data.message")}`);
   }
 };
-const updateCategory = async (id: string, body: { name?: string }) => {
+const updateJob = async (id: string, body: CreateJobDTO) => {
   try {
     const { data } = await apiService.put(
-      `${ApiConfig.baseUrl}/${ApiConfig.categories}/${id}`,
+      `${ApiConfig.baseUrl}/${ApiConfig.jobs}/${id}`,
       body,
     );
-    return data as ICategoryResponse<ICategory>;
+    return data as IJobResponse<IJob>;
   } catch (error) {
     console.error(error);
     if (get(error, "response", undefined)) {
       console.error("Error Status Code:", get(error, "response.status"));
       console.error("Error Response Data:", get(error, "response.data"));
     }
-    throw new Error(`${get(error, "response.data.data")}`);
+    throw new Error(`${get(error, "response.data.message")}`);
   }
 };
 
-export {
-  fetchCategories,
-  fetchCategoryById,
-  createCategory,
-  deleteCategory,
-  updateCategory,
+const deleteJob = async (id: string) => {
+  try {
+    const { data } = await apiService.delete(
+      `${ApiConfig.baseUrl}/${ApiConfig.jobs}/${id}`,
+    );
+    return data as IJobResponse<null>;
+  } catch (error) {
+    console.error(error);
+    if (get(error, "response", undefined)) {
+      console.error("Error Status Code:", get(error, "response.status"));
+      console.error("Error Response Data:", get(error, "response.data"));
+    }
+    throw new Error(`${get(error, "response.data.message")}`);
+  }
 };
+
+export { fetchJobs, fetchJobById, createJob, deleteJob, updateJob };

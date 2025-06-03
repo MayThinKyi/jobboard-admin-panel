@@ -1,11 +1,11 @@
 export interface ICategory {
-    _id:string;
-    name:string;
-    createdAt:string;
+  _id: string;
+  name: string;
+  createdAt: string;
 }
- 
+
 export interface ICategoryResponse<T> {
-    data:T;
-    message:string;
-    status:string;
+  data: T;
+  message: string;
+  status: string;
 }

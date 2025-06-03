@@ -29,30 +29,30 @@ interface Setting {
 const columns: ColumnDef<Setting>[] = [
   {
     accessorKey: "category",
-    header: "Category"
+    header: "Category",
   },
   {
     accessorKey: "value",
-    header: "Value"
-  }
+    header: "Value",
+  },
 ];
 const data: Setting[] = [
   {
     category: "Account",
-    value: true
+    value: true,
   },
   {
     category: "Notifications",
-    value: false
+    value: false,
   },
   {
     category: "Language",
-    value: "English"
+    value: "English",
   },
   {
     category: "Theme",
-    value: "Dark"
-  }
+    value: "Dark",
+  },
 ];
 
 export default function SettingsPage({}: Props) {

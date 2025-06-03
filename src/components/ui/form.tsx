@@ -1,16 +1,19 @@
- 'use client';
+"use client";
 
 import {
   FormProvider,
   useFormContext,
   Controller,
   type UseFormReturn,
-} from 'react-hook-form';
-import * as React from 'react';
-import { Label } from '@/components/ui/label';
-import { cn } from '@/lib/utils';
+} from "react-hook-form";
+import * as React from "react";
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
-export function Form({ children, ...props }: { children: React.ReactNode } & UseFormReturn<any>) {
+export function Form({
+  children,
+  ...props
+}: { children: React.ReactNode } & UseFormReturn<any>) {
   return <FormProvider {...props}>{children}</FormProvider>;
 }
 
@@ -26,17 +29,25 @@ export function FormField({
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState }) => render({ ...field, error: fieldState.error })}
+      render={({ field, fieldState }) =>
+        render({ ...field, error: fieldState.error })
+      }
     />
   );
 }
 
-export function FormItem({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn('space-y-2', className)} {...props} />;
+export function FormItem({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("space-y-2", className)} {...props} />;
 }
 
-export function FormLabel({ className, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {
-  return <Label className={cn('', className)} {...props} />;
+export function FormLabel({
+  className,
+  ...props
+}: React.LabelHTMLAttributes<HTMLLabelElement>) {
+  return <Label className={cn("", className)} {...props} />;
 }
 
 export function FormControl({ children }: { children: React.ReactNode }) {

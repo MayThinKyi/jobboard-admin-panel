@@ -23,14 +23,14 @@ export default function RootLayout({
         className={cn(
           "min-h-screen w-full bg-white text-black flex",
           inter.className,
-          { "debug-screens": process.env.NODE_ENV === "development" }
+          { "debug-screens": process.env.NODE_ENV === "development" },
         )}
       >
         <AppQueryProvider>
-        {/* Sidebar */}
-        <Sidebar />
-        {/* main page */}
-        <div className="p-8 w-full">{children}</div>
+          {/* Sidebar */}
+          <Sidebar />
+          {/* main page */}
+          <div className="p-8 w-full">{children}</div>
         </AppQueryProvider>
       </body>
     </html>

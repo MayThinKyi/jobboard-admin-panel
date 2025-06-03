@@ -15,7 +15,7 @@ apiService.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 apiService.interceptors.response.use(
@@ -24,7 +24,7 @@ apiService.interceptors.response.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 export { apiService };
