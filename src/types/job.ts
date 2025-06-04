@@ -1,5 +1,3 @@
-import { CreateJobFormValues } from "@/app/jobs/create/page";
-
 export interface IJob {
   _id: string;
   title: string;

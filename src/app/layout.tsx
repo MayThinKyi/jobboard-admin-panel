@@ -4,6 +4,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Sidebar from "@/components/ui/sidebar";
 import AppQueryProvider from "@/providers/AppQueryProvider";
+import AuthGuard from "@/components/AuthGuard";
+import { AuthProvider } from "@/providers/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,16 +23,20 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen w-full bg-white text-black flex",
+          "min-h-screen w-full bg-white text-black ",
           inter.className,
           { "debug-screens": process.env.NODE_ENV === "development" },
         )}
       >
         <AppQueryProvider>
-          {/* Sidebar */}
-          <Sidebar />
-          {/* main page */}
-          <div className="p-8 w-full">{children}</div>
+          <AuthProvider>
+            <AuthGuard>
+              {/* Sidebar */}
+              <Sidebar />
+              {/* main page */}
+              <div className="p-8 w-full">{children}</div>
+            </AuthGuard>
+          </AuthProvider>
         </AppQueryProvider>
       </body>
     </html>

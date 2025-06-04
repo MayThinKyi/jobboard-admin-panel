@@ -1,4 +1,5 @@
 import { ApiConfig } from "@/config/apiConfig";
+import { clearToken, getToken } from "@/lib/tokenUtils";
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 
 const apiService = axios.create({
@@ -11,6 +12,10 @@ const apiService = axios.create({
 
 apiService.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    const token = getToken();
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
     return config;
   },
   (error) => {
@@ -23,6 +28,9 @@ apiService.interceptors.response.use(
     return response;
   },
   (error) => {
+    if (error.response.status === 401) {
+      clearToken();
+    }
     return Promise.reject(error);
   },
 );
